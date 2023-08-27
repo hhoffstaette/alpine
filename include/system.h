@@ -96,7 +96,9 @@ void *memset(void *, int, size_t);
 # define collator strucmp
 #endif
 
-#define PREREQ_FOR_SYS_TRANSLATION (HAVE_WCHAR_H && HAVE_WCRTOMB && HAVE_WCWIDTH && HAVE_MBSTOWCS && HAVE_LANGINFO_H && defined(CODESET) && !defined(_WINDOWS))
+#if defined(CODESET) && !defined(_WINDOWS)
+# define PREREQ_FOR_SYS_TRANSLATION (HAVE_WCHAR_H && HAVE_WCRTOMB && HAVE_WCWIDTH && HAVE_MBSTOWCS && HAVE_LANGINFO_H)
+#endif
 
 /* System uin32 definition */
 #if	HAVE_STDINT_H
