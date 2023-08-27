@@ -29,7 +29,6 @@
 
 #include <stdio.h>
 #include <errno.h>
-extern int errno;		/* just in case */
 #include "c-client.h"
 #include "netmsg.h"
 #include "flstring.h"
