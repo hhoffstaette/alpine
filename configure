@@ -24686,6 +24686,7 @@ $as_echo X"$file" |
       setopt NO_GLOB_SUBST
     fi
 
+    RM="$RM -f"
     cfgfile=${ofile}T
     trap "$RM \"$cfgfile\"; exit 1" 1 2 15
     $RM "$cfgfile"
