@@ -147,7 +147,7 @@ with help text for the config screen and the composer that didn't have any
 reasonable place to be called from.
 Dummy change to get revision in pine.hlp
 ============= h_revision =================
-Alpine Commit 672 2023-02-05 13:10:09
+Alpine Commit 680 2025-06-05 16:00:02
 ============= h_news =================
 <HTML>
 <HEAD>
@@ -224,6 +224,9 @@ does not allow a user to input their password. Reported by Michelle McPeek.
      in a bug report by Ulf-Dietrich Braumann.
 <LI> Fix display of the DESCRIPTION field in an ical invitation. Found
      in a bug report by Ulf-Dietrich Braumann.
+<LI> Consider the encoding of a message before tranforming it to the
+     charset specified in the message. Based on a patch by Thorsten Glaser
+     <A HREF="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=726739">submitted</A> to the Debian bug tracker.
 </UL>
 
 <P>Version 2.26 adds new features and addresses bugs found in previous

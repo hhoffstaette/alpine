@@ -604,9 +604,23 @@ format_body(long int msgno, BODY *body, HANDLE_S **handlesp, HEADER_S *hp, int f
 	    else
 	      charset = cpystr(ps_global->display_charmap);
 
-	    if(strucmp(charset, "us-ascii") && strucmp(charset, "utf-8")){
-		/* transliterate message text to UTF-8 */
-		gf_link_filter(gf_utf8, gf_utf8_opt(charset));
+	    /* consider encoding before transliterating message text to UTF-8 */
+	    switch(body->encoding){
+		case ENCOTHER: /* is this the best decision? */
+		     dprint((1, "format_body: unknown CTE: \"%s\" (%d)\n",
+				 (body->encoding <= ENCMAX
+				  && body_encodings[body->encoding])
+				     ? body_encodings[body->encoding]
+				     : "BEYOND-KNOWN-TYPES",
+				  body->encoding));
+		case ENC7BIT:
+		case ENC8BIT:
+		case ENCBINARY:
+		     if(strucmp(charset, "us-ascii") && strucmp(charset, "utf-8"))
+			gf_link_filter(gf_utf8, gf_utf8_opt(charset));
+
+		default:
+		    break; /* do not do anything in any other case */
 	    }
 	    if (charset) fs_give((void **) &charset);
 
