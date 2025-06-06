@@ -49,7 +49,7 @@ LT_INIT
 AC_SUBST([LIBTOOL_DEPS])
 
 AC_PATH_PROG(AR, ar, ar)
-AC_PATH_PROG(RM, rm, rm)
+dnl AC_PATH_PROG(RM, rm, rm)
 AC_PATH_PROG(CP, cp, cp)
 AC_PATH_PROG(LN, ln, ln)
 AC_PATH_PROG(LS, ls, ls)
@@ -1520,6 +1520,7 @@ if test "x$alpine_SSLTYPE" != "xnone" ; then
 	],
 	[ AC_MSG_RESULT(yes)
 	  alpine_SSLPROVIDER="libressl"
+	  CFLAGS="$CFLAGS -DOPENSSL_1_1_0"
 	],
 	[ AC_MSG_RESULT(no)
 	],
@@ -1570,7 +1571,7 @@ if test "x$alpine_SSLTYPE" != "xnone" -a "x$alpine_SSLPROVIDER" != "xlibressl" ;
 	],
 	[ AC_MSG_RESULT(yes)
 	  alpine_SSLVERSION="new"
-	  CFLAGS="$CFLAGS -DOPENSSL_1_1_0 -DOPENSSL_API_COMPAT=0x10100000L"
+	  CFLAGS="$CFLAGS -DOPENSSL_1_1_0"
 	],
 	[ AC_MSG_RESULT(no)
 	  alpine_SSLVERSION="old" ],
@@ -1965,7 +1966,7 @@ AC_CACHE_CHECK(argument pointer type of qsort compare function and base,
 ac_cv_func_qsort_argtype,
 [AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #if	HAVE_STDLIB_H
-#include "stdlib.h"
+#include <stdlib.h>
 #endif
 
 extern void *base;
