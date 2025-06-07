@@ -11641,6 +11641,42 @@ gf_local_nvtnl(FILTER_S *f, int flg)
 
 }
 
+/*
+ * This filter transforms \n to \r\n, and is called
+ * only after decoding base64 encoding, since some
+ * mailers do not transform \n to \r\n before encoding.
+ */
+void
+gf_fixnl(FILTER_S *f, int flg)
+{
+    GF_INIT(f, f->next);
+
+    if(flg == GF_DATA){
+	register unsigned char c, d = '\0';
+
+	while(GF_GETC(f, c)){
+	    if(c == '\012' && d != '\015'){
+		GF_PUTC(f->next, '\015');
+		GF_PUTC(f->next, '\012');
+	    }
+	    else
+	      GF_PUTC(f->next, c);
+	    d = c;
+	}
+
+	GF_END(f, f->next);
+    }
+    else if(flg == GF_EOD){
+	(void) GF_FLUSH(f->next);
+	(*f->next->f)(f->next, GF_EOD);
+    }
+    else if(GF_RESET){
+	dprint((9, "-- gf_reset gf_fixnl\n"));
+	/* no op */
+    }
+
+}
+
 void
 free_filter_module_globals(void)
 {

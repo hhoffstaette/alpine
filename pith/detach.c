@@ -213,6 +213,7 @@ detach(MAILSTREAM *stream,		/* c-client stream to use         */
 
       case ENCBASE64:
 	gf_link_filter(gf_b64_binary, NULL);
+	if(is_text) gf_link_filter(gf_fixnl, NULL);
         break;
 
       case ENCQUOTEDPRINTABLE:

@@ -147,7 +147,7 @@ with help text for the config screen and the composer that didn't have any
 reasonable place to be called from.
 Dummy change to get revision in pine.hlp
 ============= h_revision =================
-Alpine Commit 680 2025-06-05 16:00:02
+Alpine Commit 683 2025-06-07 16:37:37
 ============= h_news =================
 <HTML>
 <HEAD>
@@ -193,7 +193,7 @@ new additions to Alpine, please check it periodically.
 <P> Changes since the release of version 2.26 include:
 <!-- Changes since the release of version <!--#echo var="ALPINE_VERSION"-->
 <!-- include: -->
-<P> New features include:
+<P> New features and enhancements include:
 <UL>
 <LI> Microsoft servers do not deal well with a message that is forwarded
      as an attachment by Alpine due to the way Alpine constructs the cookie
@@ -208,6 +208,8 @@ new additions to Alpine, please check it periodically.
 <LI> For mailing lists, Alpine adds a description of the type of link
      (web or mail) for each option related to the subscription to the list.
      Contributed by Daniel Schwarz.
+<LI> When a message that is encoded in base64 is decoded, fix the text part
+     if it is not encoded using network newline characters.
 </UL>
 
 <P> Bugs addressed include:
